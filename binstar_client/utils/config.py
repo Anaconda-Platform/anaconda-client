@@ -15,6 +15,10 @@ try:
     from urllib import quote_plus
 except ImportError:
     from urllib.parse import quote_plus
+try:
+    from collections.abc import Mapping
+except ImportError:
+    from collections import Mapping
 
 from binstar_client.utils.conda import CONDA_PREFIX, CONDA_ROOT
 from binstar_client.utils.appdirs import AppDirs, EnvAppDirs
@@ -90,7 +94,7 @@ SEARCH_PATH = (
 
 def recursive_update(config, update_dict):
     for update_key, updated_value in update_dict.items():
-        if isinstance(updated_value, collections.Mapping):
+        if isinstance(updated_value, Mapping):
             updated_value_dict = recursive_update(config.get(update_key, {}), updated_value)
             config[update_key] = updated_value_dict
         else:
