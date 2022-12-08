@@ -30,6 +30,12 @@ jobs:
           auto-update-conda: true
           python-version: 3.8
 
+      - name: Conda environment information
+        run: |
+          conda info
+          conda config --show
+          conda list -n test --show-channel-urls
+
       - name: Install requirements
         run: |
           conda install -n test --file requirements.txt --file requirements-dev.txt
@@ -63,11 +69,10 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - macos-latest
-          - ubuntu-latest
+          # - macos-latest
+          # - ubuntu-latest
           - windows-latest
         python:
-          - 3.6
           - 3.7
           - 3.8
           - 3.9
